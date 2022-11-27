@@ -7,9 +7,11 @@ COPY ./poetry.lock /app/
 COPY ./pyproject.toml /app/
 
 ENV POETRY_HOME="/opt/poetry"
-#ENV PATH="${PATH}:/root/.poetry/bin"
 # prepend poetry to path
 ENV PATH="$POETRY_HOME/bin:$PATH"
+
+RUN apt-get update \
+    && apt-get -y install libpq-dev gcc
 
 RUN pip install poetry
 RUN poetry config virtualenvs.create false

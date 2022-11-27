@@ -17,5 +17,7 @@ services:
       - POSTGRES_DB=todo-list
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=todo-list
+    ports:
+      - "5432:5432"
     restart: on-failure
 

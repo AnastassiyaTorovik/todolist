@@ -37,6 +37,18 @@ async = ["asgiref (>=3.2)"]
 dotenv = ["python-dotenv"]
 
 [[package]]
+name = "flask-injector"
+version = "0.14.0"
+description = "Adds Injector, a Dependency Injection framework, support to Flask."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Flask = ">=2.1.2"
+injector = ">=0.20.0"
+
+[[package]]
 name = "greenlet"
 version = "2.0.1"
 description = "Lightweight in-process concurrent programming"
@@ -63,6 +75,20 @@ zipp = ">=0.5"
 docs = ["sphinx (>=3.5)", "jaraco.packaging (>=9)", "rst.linker (>=1.9)", "furo", "jaraco.tidelift (>=1.4)"]
 perf = ["ipython"]
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-cov", "pytest-enabler (>=1.3)", "packaging", "pyfakefs", "flufl.flake8", "pytest-perf (>=0.9.2)", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)", "pytest-flake8", "importlib-resources (>=1.3)"]
+
+[[package]]
+name = "injector"
+version = "0.20.1"
+description = "Injector - Python dependency injection framework, inspired by Guice"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+typing-extensions = {version = ">=3.7.4", markers = "python_version < \"3.9\""}
+
+[package.extras]
+dev = ["pytest", "pytest-cov (>=2.5.1)", "check-manifest", "mypy", "black", "dataclasses"]
 
 [[package]]
 name = "itsdangerous"
@@ -135,6 +161,14 @@ pymysql = ["pymysql (<1)", "pymysql"]
 sqlcipher = ["sqlcipher3-binary"]
 
 [[package]]
+name = "typing-extensions"
+version = "4.4.0"
+description = "Backported and Experimental Type Hints for Python 3.7+"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "werkzeug"
 version = "2.2.2"
 description = "The comprehensive WSGI web application library."
@@ -163,18 +197,21 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "e5778db40d8b84b959710340f788127873e88637d9026b74e89c28bcb70a5e40"
+content-hash = "ce478a189ad2b8ec969b2def211a0d615a0ebdbfc629baa810881e9f7091a310"
 
 [metadata.files]
 click = []
 colorama = []
 flask = []
+flask-injector = []
 greenlet = []
 importlib-metadata = []
+injector = []
 itsdangerous = []
 jinja2 = []
 markupsafe = []
 psycopg2 = []
 sqlalchemy = []
+typing-extensions = []
 werkzeug = []
 zipp = []

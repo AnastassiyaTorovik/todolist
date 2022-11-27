@@ -9,6 +9,8 @@ python = "^3.8"
 Flask = "^2.2.2"
 SQLAlchemy = "^1.4.44"
 psycopg2 = "^2.9.5"
+injector = "^0.20.1"
+Flask-Injector = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
 
