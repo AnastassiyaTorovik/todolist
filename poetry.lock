@@ -95,6 +95,14 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "psycopg2"
+version = "2.9.5"
+description = "psycopg2 - Python-PostgreSQL Database Adapter"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "sqlalchemy"
 version = "1.4.44"
 description = "Database Abstraction Library"
@@ -155,7 +163,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ad9c32f90305ffed3cce4e5563a6e884af68f170532feeb2f625f16a9fbcc34e"
+content-hash = "e5778db40d8b84b959710340f788127873e88637d9026b74e89c28bcb70a5e40"
 
 [metadata.files]
 click = []
@@ -166,6 +174,7 @@ importlib-metadata = []
 itsdangerous = []
 jinja2 = []
 markupsafe = []
+psycopg2 = []
 sqlalchemy = []
 werkzeug = []
 zipp = []
