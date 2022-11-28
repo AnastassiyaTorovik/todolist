@@ -1,14 +1,12 @@
 """In this module there are sqlalchemy objects representing database tables and their columns.
 """
-from sqlalchemy.orm import declarative_base
+from todo_list.run import db
 
 from sqlalchemy import (
     Column, String, Boolean, Date)
 
-Base = declarative_base()
 
-
-class TodoList(Base):
+class TodoList(db.Model):
     __tablename__ = 'TODO_LIST'
 
     __table_args__ = ()

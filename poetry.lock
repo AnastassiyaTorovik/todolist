@@ -49,6 +49,18 @@ Flask = ">=2.1.2"
 injector = ">=0.20.0"
 
 [[package]]
+name = "flask-sqlalchemy"
+version = "3.0.2"
+description = "Add SQLAlchemy support to your Flask application."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Flask = ">=2.2"
+SQLAlchemy = ">=1.4.18"
+
+[[package]]
 name = "greenlet"
 version = "2.0.1"
 description = "Lightweight in-process concurrent programming"
@@ -197,13 +209,14 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ce478a189ad2b8ec969b2def211a0d615a0ebdbfc629baa810881e9f7091a310"
+content-hash = "98804350b3aba2ea5b1fe384e2732b47edc9abf556cf22f7ddf7848d8928ef43"
 
 [metadata.files]
 click = []
 colorama = []
 flask = []
 flask-injector = []
+flask-sqlalchemy = []
 greenlet = []
 importlib-metadata = []
 injector = []

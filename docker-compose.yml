@@ -1,23 +1,33 @@
 services:
   todo-list:
     build: .
+    command: python todo_list/manage.py run -h 0.0.0.0 -p 8080
     ports:
       - 8080:8080
     environment:
       - DB_NAME=todo-list
-      - DB_USER=postgres
+      - DB_USER=todo-list
       - DB_PASSWORD=todo-list
       - DB_HOST=todo-list-db
       - DB_PORT=5432
+    env_file:
+      - ./.env
+    depends_on:
+      - todo-list-db
     restart: on-failure
 
   todo-list-db:
     image: postgres:14.5
     environment:
       - POSTGRES_DB=todo-list
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=todo-list
       - POSTGRES_PASSWORD=todo-list
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
     restart: on-failure
+
+volumes:
+  postgres_data:
 

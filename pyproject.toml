@@ -11,6 +11,7 @@ SQLAlchemy = "^1.4.44"
 psycopg2 = "^2.9.5"
 injector = "^0.20.1"
 Flask-Injector = "^0.14.0"
+flask-sqlalchemy = "^3.0.2"
 
 [tool.poetry.dev-dependencies]
 

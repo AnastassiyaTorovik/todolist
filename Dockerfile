@@ -19,5 +19,5 @@ RUN poetry install
 RUN poetry build
 
 EXPOSE 8080
-ENTRYPOINT ["/usr/local/bin/python3.10"]
-CMD ["todo_list/run.py"]
+#ENTRYPOINT ["/usr/local/bin/python3.10"]
+CMD ["python3", "todo_list/run.py"]
