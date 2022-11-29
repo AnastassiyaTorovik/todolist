@@ -4,6 +4,7 @@ from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import (
     Column, String, Boolean, Date)
+from flask_marshmallow import Marshmallow
 
 # from todo_list.di import dependency_injection as di
 
@@ -13,6 +14,7 @@ logging.captureWarnings(True)
 app = Flask(__name__)
 app.config.from_object("todo_list.configuration.postgresql_database.Config")
 db = SQLAlchemy(app)
+ma = Marshmallow(app)
 
 
 class TaskModel(db.Model):
@@ -37,12 +39,19 @@ class TaskModel(db.Model):
     )
 
 
+class TaskSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = TaskModel
+
+
+todo_schema = TaskSchema()
+todos_schema = TaskSchema(many=True)
 
 
 @app.route("/todos")
 def todo_list():
     all_tasks = TaskModel.query.all()
-    return jsonify(all_tasks)
+    return jsonify(todos_schema.dump(all_tasks))
 
 
 @app.route("/todo", methods=["POST"])
