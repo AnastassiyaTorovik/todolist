@@ -23,9 +23,7 @@ services:
       - POSTGRES_USER=todo-list
       - POSTGRES_PASSWORD=todo-list
     ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - "5433:5432"
     restart: on-failure
 
 volumes:
