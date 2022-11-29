@@ -2,10 +2,7 @@ import logging
 
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import (
-    Column, String, Boolean, Date)
 
-# from todo_list.di import dependency_injection as di
 
 logger = logging.getLogger(__name__)
 logging.captureWarnings(True)
@@ -20,20 +17,20 @@ class Tasks(db.Model):
 
     __table_args__ = ()
 
-    task_id = Column(
-        'task_id', String(36), primary_key=True, unique=True, nullable=False
+    task_id = db.Column(
+        'task_id', db.String(36), primary_key=True, unique=True, nullable=False
     )
 
-    text = Column(
-        'text', String(255), nullable=False
+    text = db.Column(
+        'text', db.String(255), nullable=False
     )
 
-    status = Column(
-        'status', Boolean, nullable=False
+    status = db.Column(
+        'status', db.Boolean, nullable=False
     )
 
-    deadline = Column(
-        'deadline', Date, nullable=False
+    deadline = db.Column(
+        'deadline', db.Date, nullable=False
     )
 
 

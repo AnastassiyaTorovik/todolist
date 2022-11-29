@@ -1,6 +1,6 @@
 from flask.cli import FlaskGroup
 
-from run import app, db
+from todo_list.app import app, db
 
 
 cli = FlaskGroup(app)
