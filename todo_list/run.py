@@ -15,7 +15,7 @@ app.config.from_object("todo_list.configuration.postgresql_database.Config")
 db = SQLAlchemy(app)
 
 
-class Tasks(db.Model):
+class TaskModel(db.Model):
     __tablename__ = 'TASKS'
 
     __table_args__ = ()
@@ -37,9 +37,17 @@ class Tasks(db.Model):
     )
 
 
-@app.route("/add_task", methods=["POST"])
+
+
+@app.route("/todos")
+def todo_list():
+    all_tasks = TaskModel.query.all()
+    return jsonify(all_tasks)
+
+
+@app.route("/todo", methods=["POST"])
 def add_task():
-    new_task = Tasks(task_id="Ukol1", text="some task", status=False, deadline='2022-11-30')
+    new_task = TaskModel(task_id="Ukol1", text="some task", status=False, deadline='2022-11-30')
     db.session.add(new_task)
     db.session.commit()
     return jsonify("done"), 200
