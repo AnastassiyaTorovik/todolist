@@ -26,6 +26,3 @@ services:
       - "5433:5432"
     restart: on-failure
 
-volumes:
-  postgres_data:
-
