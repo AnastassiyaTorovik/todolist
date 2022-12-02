@@ -2,16 +2,11 @@
 
 set -e
 
-if [ "$DATABASE" = "postgres" ]
-then
-    echo "Waiting for postgres..."
+echo "Waiting for postgres..."
 
-    while ! nc -z $SQL_HOST $SQL_PORT; do
-      sleep 0.1
-    done
-
-    echo "PostgreSQL started"
-fi
+while ! nc -z todo-list-db 5432; do
+  sleep 0.1
+done
 
 python todo_list/manage.py create_db
 
