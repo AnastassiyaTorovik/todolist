@@ -208,6 +208,21 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "pydantic"
+version = "1.10.2"
+description = "Data validation and settings management using python type hints"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+typing-extensions = ">=4.1.0"
+
+[package.extras]
+dotenv = ["python-dotenv (>=0.10.4)"]
+email = ["email-validator (>=1.0.3)"]
+
+[[package]]
 name = "pyparsing"
 version = "3.0.9"
 description = "pyparsing module - Classes and methods to define and execute parsing grammars"
@@ -295,7 +310,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "72b5948eba3096e51b075b231cec345d12ccdbd72c50f2c007600ef0e91e69fd"
+content-hash = "e7f9cc3bf7e40ec93e2f0a2285ca12a00b5265c3f4aea950336861337936a4c9"
 
 [metadata.files]
 click = []
@@ -314,6 +329,7 @@ marshmallow = []
 marshmallow-sqlalchemy = []
 packaging = []
 psycopg2 = []
+pydantic = []
 pyparsing = []
 six = []
 sqlalchemy = []
