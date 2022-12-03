@@ -3,12 +3,12 @@ from pydantic import ValidationError
 
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import (
-    Column, String, Boolean, Date)
-from sqlalchemy.exc import IntegrityError
 from flask_marshmallow import Marshmallow
+from sqlalchemy import (
+    Column, String, Boolean, Date, asc)
+from sqlalchemy.exc import IntegrityError
 
-from todo_list.validators.input_validators import TaskValidator
+from todo_list.validators.input_validators import TaskValidator, FilterTaskValidator
 from todo_list.helpers.exceptions import get400, get404
 
 
@@ -54,10 +54,37 @@ todo_schema = TaskSchema()
 todos_schema = TaskSchema(many=True)
 
 
+@app.route("/")
+def say_hello():
+    return jsonify("Welcome to TO DO ;)")
+
+
 @app.route("/todos")
 def get_todo_list():
-    all_tasks = TaskModel.query.all()
-    return jsonify(todos_schema.dump(all_tasks))
+    params = request.args.to_dict()
+    try:
+        params = FilterTaskValidator(**params).dict(exclude_none=True)
+    except (ValidationError, ValueError) as e:
+        return get400(f'{e}').message
+
+    filters = []
+    if params.get('date_from'):
+        filters.append(TaskModel.deadline >= params['date_from'])
+    if params.get('date_to'):
+        filters.append(TaskModel.deadline <= params['date_to'])
+    if 'is_done' in params.keys():
+        filters.append(TaskModel.is_done == params['is_done'])
+
+    query = TaskModel.query.filter(*filters)
+
+    if params.get('sort_by'):
+        query = query.order_by(asc(TaskModel.deadline))
+    if params.get('count'):
+        query = query.limit(params['count'])
+
+    filtered_tasks = query.all()
+
+    return jsonify(todos_schema.dump(filtered_tasks))
 
 
 @app.route("/todo", methods=["POST"])
