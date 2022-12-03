@@ -27,7 +27,7 @@ class TaskValidator(BaseModel):
         return value
 
 
-class FilterTaskValidator(BaseModel):
+class FilterTasksValidator(BaseModel):
     date_from: Optional[Deadline] = None
     date_to: Optional[Deadline] = None
     count: Optional[int] = None

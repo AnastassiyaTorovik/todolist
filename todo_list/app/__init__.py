@@ -1,14 +1,14 @@
 import logging
 from pydantic import ValidationError
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from sqlalchemy import (
     Column, String, Boolean, Date, asc)
 from sqlalchemy.exc import IntegrityError
 
-from todo_list.validators.input_validators import TaskValidator, FilterTaskValidator
+from todo_list.validators.input_validators import TaskValidator, FilterTasksValidator
 from todo_list.helpers.exceptions import get400, get404
 
 
@@ -63,7 +63,7 @@ def say_hello():
 def get_todo_list():
     params = request.args.to_dict()
     try:
-        params = FilterTaskValidator(**params).dict(exclude_none=True)
+        params = FilterTasksValidator(**params).dict(exclude_none=True)
     except (ValidationError, ValueError) as e:
         return get400(f'{e}').message
 
@@ -85,6 +85,11 @@ def get_todo_list():
     filtered_tasks = query.all()
 
     return jsonify(todos_schema.dump(filtered_tasks))
+
+
+@app.route("/most-urgent")
+def get_most_urgent():
+    return redirect('/todos?date_from=now&count=1&sort_by=urgency')
 
 
 @app.route("/todo", methods=["POST"])
