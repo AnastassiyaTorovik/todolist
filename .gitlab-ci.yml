@@ -5,6 +5,7 @@ unit:tests:
   stage: test
   image: python:3.10-slim
   script:
+    - apt-get update && apt-get -y install libpq-dev gcc
     - pip install poetry
     - poetry config virtualenvs.create false
     - poetry install
