@@ -9,4 +9,5 @@ unit:tests:
     - pip install poetry
     - poetry config virtualenvs.create false
     - poetry install
-    - poetry run pytest
+    - cd tests
+    - python3 -m unittest -v
