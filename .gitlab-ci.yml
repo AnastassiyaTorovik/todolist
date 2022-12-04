@@ -1,12 +1,11 @@
 stages:
   - test
 
-before_script:
-  - pip install poetry
-  - poetry config virtualenvs.create false
-  - poetry install
-
 unit:tests:
   stage: test
+  image: python:3.10-slim
   script:
+    - pip install poetry
+    - poetry config virtualenvs.create false
+    - poetry install
     - poetry run pytest
