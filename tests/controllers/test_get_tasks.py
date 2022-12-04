@@ -121,6 +121,38 @@ class TestGetTask(SQLiteConfig):
         self.assert200(response, response.status)
         self.assertEqual(expected_response, response_body)
 
-    @parametrized([{"date_from": "today", "date_to": "2022-12-01", "status_code": 400, "message":""}])
-    def test_invalid_parameters(self, date_from, date_to):
-        pass
+    @parametrized(
+        [
+            {"test_id": "test1", "date_from": "today", "date_to": "2022-12-01", "status_code": 400, "message": "unexpected value. permitted are"},
+            {"test_id": "test2", "date_from": "now", "date_to": "2022-11-01", "status_code": 400, "message": "date_from needs to be lower"},
+            {"test_id": "test3", "date_from": "2022-12-01", "date_to": "31/12/2022", "status_code": 400,
+             "message": "unexpected value. permitted are"},
+            {"test_id": "test4", "date_from": None, "date_to": None, "status_code": 400, "message": "unexpected value. permitted are"}
+                   ]
+                  )
+    def test_invalid_date_parameters(self, test_id, date_from, date_to, status_code, message):
+        if test_id == "test1":
+            self.popupate_database()
+
+        response = self.client.get(f'/todos?date_from={date_from}&date_to={date_to}',
+                                   content_type='application/json')
+        self.assertStatus(response, status_code)
+        self.assertIn(message, response.text.lower())
+
+    def test_count_parameter(self):
+        self.popupate_database()
+        response = self.client.get(f'/todos?count=200',
+                                   content_type='application/json')
+        self.assert200(response, response.status)
+        self.assertEqual(5, len(response.json), 'Incorrect todo count.')
+
+    def test_incorrect_sort_by(self):
+        self.popupate_database()
+        response = self.client.get(f'/todos?sort_by=blahblah',
+                                   content_type='application/json')
+        self.assert400(response, response.status)
+        self.assertIn('urgency', response.text.lower())
+
+
+
+

@@ -42,7 +42,10 @@ class FilterTasksValidator(BaseModel):
         if field_value == 'now':
             field_value = datetime.now().date()
         else:
-            assert datetime.strptime(field_value, '%Y-%m-%d')
+            try:
+                datetime.strptime(field_value, '%Y-%m-%d')
+            except Exception:
+                raise ValueError("Unexpected value. Permitted are are 'now' or date in the format '%Y-%m-%d'")
         return field_value
 
     @root_validator()

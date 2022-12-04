@@ -1,0 +1,12 @@
+stages:
+  - test
+
+before_script:
+  - pip install poetry
+  - poetry config virtualenvs.create false
+  - poetry install
+
+unit:tests:
+  stage: test
+  script:
+    - poetry run pytest
