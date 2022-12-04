@@ -9,10 +9,8 @@ class SQLiteConfig(TestCase):
     def create_app(self):
         app.config['TESTING'] = True
         app.config.from_object("todo_list.configuration.sqlite_database.Config")
-        try:
+        if not app.got_first_request:
             db.init_app(app)
-        except AssertionError: #TODO no idea why it's not working here :D to check why context is not teared down after each request
-            pass
         return app
 
     def setUp(self):
